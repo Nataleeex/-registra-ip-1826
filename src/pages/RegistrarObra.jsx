@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import "../App.css";
 
@@ -11,6 +12,7 @@ function RegistrarObra() {
         autor: "Isaac Emmanuel Martinez Torres"
     });
 
+    // Actualizar los datos del formulario
     const actualizarDatos = (campo, valor) => {
         setDatos({
             ...datos,
@@ -18,13 +20,31 @@ function RegistrarObra() {
         });
     };
 
-    const siguientePaso = () => {
-        setDatos({
-            ...datos,
-            paso: datos.paso + 1
-        });
+    // Validar cada paso
+    const pasoValido = () => {
+        if (datos.paso === 1) {
+            return datos.archivo !== null;
+        }
+
+        if (datos.paso === 2) {
+            return datos.titulo.trim().length >= 5 &&
+                   datos.categoria !== "";
+        }
+
+        return true;
     };
 
+    // Avanzar al siguiente paso
+    const siguientePaso = () => {
+        if (pasoValido()) {
+            setDatos({
+                ...datos,
+                paso: datos.paso + 1
+            });
+        }
+    };
+
+    // Regresar al paso anterior
     const pasoAnterior = () => {
         setDatos({
             ...datos,
@@ -37,6 +57,7 @@ function RegistrarObra() {
             <h1>Registrar nueva obra</h1>
             <p>Completa los siguientes pasos para registrar tu obra.</p>
 
+            {/* Barra de progreso */}
             <div className="progreso">
                 {[1, 2, 3, 4].map((numero) => (
                     <div
@@ -51,6 +72,8 @@ function RegistrarObra() {
             </div>
 
             <div className="contenido-wizard">
+
+                {/* PASO 1: SUBIR ARCHIVO */}
                 {datos.paso === 1 && (
                     <div className="paso-contenido">
                         <h2>Subir archivo</h2>
@@ -63,13 +86,21 @@ function RegistrarObra() {
                                     actualizarDatos("archivo", e.target.files[0])
                                 }
                             />
+
                             {datos.archivo && (
-                                <p>Archivo: {datos.archivo.name}</p>
+                                <p>Archivo seleccionado: {datos.archivo.name}</p>
                             )}
                         </div>
+
+                        {!datos.archivo && (
+                            <p className="mensaje-error">
+                                Debes seleccionar un archivo para continuar.
+                            </p>
+                        )}
                     </div>
                 )}
 
+                {/* PASO 2: METADATOS */}
                 {datos.paso === 2 && (
                     <div className="paso-contenido">
                         <h2>Metadatos de la obra</h2>
@@ -77,11 +108,18 @@ function RegistrarObra() {
                         <label>Título de la obra</label>
                         <input
                             type="text"
+                            placeholder="Escribe el título de tu obra"
                             value={datos.titulo}
                             onChange={(e) =>
                                 actualizarDatos("titulo", e.target.value)
                             }
                         />
+
+                        {datos.titulo.trim().length < 5 && (
+                            <p className="mensaje-error">
+                                El título debe tener al menos 5 caracteres.
+                            </p>
+                        )}
 
                         <label>Categoría</label>
                         <select
@@ -98,8 +136,15 @@ function RegistrarObra() {
                             <option value="Software">Software</option>
                         </select>
 
+                        {!datos.categoria && (
+                            <p className="mensaje-error">
+                                Debes seleccionar una categoría.
+                            </p>
+                        )}
+
                         <label>Descripción</label>
                         <textarea
+                            placeholder="Describe brevemente tu obra"
                             value={datos.descripcion}
                             onChange={(e) =>
                                 actualizarDatos("descripcion", e.target.value)
@@ -108,32 +153,47 @@ function RegistrarObra() {
                     </div>
                 )}
 
+                {/* PASO 3: VISTA PREVIA */}
                 {datos.paso === 3 && (
                     <div className="paso-contenido">
                         <h2>Vista previa de la obra</h2>
-                        <p><strong>Archivo:</strong> {datos.archivo?.name}</p>
-                        <p><strong>Título:</strong> {datos.titulo}</p>
-                        <p><strong>Categoría:</strong> {datos.categoria}</p>
-                        <p><strong>Descripción:</strong> {datos.descripcion}</p>
-                        <p><strong>Autor:</strong> {datos.autor}</p>
+                        <p>Revisa la información antes de continuar.</p>
+
+                        <div className="resumen-obra">
+                            <p><strong>Archivo:</strong> {datos.archivo?.name}</p>
+                            <p><strong>Título:</strong> {datos.titulo}</p>
+                            <p><strong>Categoría:</strong> {datos.categoria}</p>
+                            <p><strong>Descripción:</strong> {datos.descripcion || "Sin descripción"}</p>
+                            <p><strong>Autor:</strong> {datos.autor}</p>
+                        </div>
                     </div>
                 )}
 
+                {/* PASO 4: CONFIRMACIÓN */}
                 {datos.paso === 4 && (
                     <div className="paso-contenido">
                         <h2>Confirmación</h2>
                         <p>Estás listo para registrar tu obra.</p>
                     </div>
                 )}
+
             </div>
 
+            {/* Botones de navegación */}
             <div className="botones-wizard">
                 {datos.paso > 1 && (
-                    <button onClick={pasoAnterior}>Atrás</button>
+                    <button onClick={pasoAnterior}>
+                        Atrás
+                    </button>
                 )}
 
                 {datos.paso < 4 && (
-                    <button onClick={siguientePaso}>Siguiente</button>
+                    <button
+                        onClick={siguientePaso}
+                        disabled={!pasoValido()}
+                    >
+                        Siguiente
+                    </button>
                 )}
             </div>
         </div>
