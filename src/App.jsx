@@ -10,6 +10,7 @@ import {
 import Layout from "./components/Layout";
 import Registro from "./pages/Registro";
 import Dashboard from "./pages/Dashboard";
+import RegistrarObra from "./pages/RegistrarObra";
 import RutaProtegida from "./components/RutaProtegida";
 
 import "./App.css";
@@ -25,6 +26,11 @@ function App() {
             <Route
               path="/dashboard"
               element={<Dashboard />}
+            />
+
+            <Route
+              path="/registrar-obra"
+              element={<RegistrarObra />}
             />
           </Route>
 

@@ -289,3 +289,236 @@ a {
   }
 
 }
+
+
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 65vh;
+}
+
+.dashboard-card {
+  width: 100%;
+  max-width: 700px;
+  padding: var(--spacing-xl);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-card);
+}
+
+.dashboard-card h2 {
+  color: var(--color-primary);
+  font-size: var(--font-size-large);
+  margin-bottom: var(--spacing-sm);
+}
+
+.dashboard-description {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-lg);
+}
+
+.dashboard-info {
+  background-color: var(--color-surface);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-medium);
+  margin-bottom: var(--spacing-lg);
+}
+
+.dashboard-info p {
+  margin-bottom: var(--spacing-xs);
+}
+
+.logout-button {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-small);
+  font-weight: bold;
+}
+
+.logout-button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+@media (max-width: 600px) {
+  .dashboard-card {
+    padding: var(--spacing-md);
+  }
+}
+
+
+/* =====================================
+   PRACTICA 03 - REGISTRO DE OBRAS
+===================================== */
+
+.registrar-obra {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 30px;
+    background: var(--color-superficie, #ffffff);
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.registrar-obra h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.registrar-obra > p {
+    text-align: center;
+    color: #777;
+    margin-bottom: 35px;
+}
+
+/* Barra de progreso */
+
+.progreso {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.circulo {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #dddddd;
+    color: #555;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.circulo.activo {
+    background: var(--color-primario, #2563eb);
+    color: white;
+}
+
+/* Contenido del wizard */
+
+.contenido-wizard {
+    padding: 25px;
+    border: 1px solid #dddddd;
+    border-radius: 12px;
+    min-height: 260px;
+}
+
+.paso-contenido h2 {
+    margin-bottom: 15px;
+}
+
+.paso-contenido label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.paso-contenido input,
+.paso-contenido select,
+.paso-contenido textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.paso-contenido textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Zona de archivos */
+
+.zona-archivo {
+    margin-top: 25px;
+    padding: 30px;
+    border: 2px dashed #aaaaaa;
+    border-radius: 12px;
+    text-align: center;
+}
+
+/* Vista previa */
+
+.resumen-obra {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    overflow-wrap: anywhere;
+}
+
+.resumen-obra p {
+    margin: 12px 0;
+}
+
+/* Mensajes de validación */
+
+.mensaje-error {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+/* Botones */
+
+.botones-wizard {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    gap: 15px;
+}
+
+.botones-wizard button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    background: var(--color-primario, #2563eb);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.botones-wizard button:disabled {
+    background: #aaaaaa;
+    cursor: not-allowed;
+}
+
+.botones-wizard button:hover:not(:disabled) {
+    opacity: 0.85;
+}
+
+@media (max-width: 600px) {
+    .registrar-obra {
+        margin: 15px;
+        padding: 18px;
+    }
+
+    .progreso {
+        gap: 15px;
+    }
+
+    .contenido-wizard {
+        padding: 15px;
+    }
+}
+
+.registrar-obra h1 {
+    color: #1e293b;
+    font-weight: 800;
+}
+
+.registrar-obra h2 {
+    color: #1e293b;
+}
