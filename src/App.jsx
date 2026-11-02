@@ -10,6 +10,7 @@ import Layout from "./components/Layout";
 import Registro from "./pages/Registro";
 import Dashboard from "./pages/Dashboard";
 import RegistrarObra from "./pages/RegistrarObra";
+import DetalleObra from "./pages/DetalleObra";
 import RutaProtegida from "./components/RutaProtegida";
 
 import "./App.css";
@@ -30,6 +31,10 @@ function App() {
             <Route
               path="/registrar-obra"
               element={<RegistrarObra />}
+            />
+            <Route
+              path="/detalle-obra/:folio"
+              element={<DetalleObra />}
             />
           </Route>
 
